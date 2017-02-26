@@ -1,6 +1,7 @@
 
 from random import randint
 from PIL import Image
+import pickle
 
 imgx = 500; imgy = 500
 image = Image.new("RGB", (imgx, imgy))
@@ -25,7 +26,7 @@ gState=[]
 ch=randint(0,11)
 if ch<6:
     choice=1
-else: choice=randint(0,8)
+else: choice=randint(0,6)
 for x in range(nm):
     stack = [(randint(0, sx - 1),randint(0, sy - 1))]
     sState.append(stack[-1])    #The start state is assigned.
@@ -68,13 +69,13 @@ for x in range(nm):
         if maze[x][gx][gy]==1:
             gState.append((gx,gy))
 
-
+'''
     # paint the maze
     for ky in range(imgy):
         for kx in range(imgx):
             pixels[kx, ky] = color[maze[x][sy * ky // imgy][sx * kx // imgx]]
-    image.save("Maze_" + str(x) + "x" + ".png", "PNG")
-
+    image.save("Maze_" + str(x) + ".png", "PNG")
+'''
 '''
 #Print the maze
 for x in range(2):
@@ -87,15 +88,7 @@ for x in range(2):
         print('\n')
    
 '''
-'''
-#Write maze to a file
-with open('maze.txt', 'w') as file_handler:
-    counter=0
-    for item in maze:
-        file_handler.write("{}\n".format(item))
-        if(counter%101==0):
-            file_handler.write('\n')
-        if(counter%(101*101)==0):
-            file_handler.write('\n')
-'''
 
+#Write maze to a file as a pickle
+pickle.dump(open("mazes.b", wb))
+ 
